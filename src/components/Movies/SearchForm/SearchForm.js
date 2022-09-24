@@ -3,16 +3,21 @@ import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 
 const SearchForm = () => {
   return (
-    <section className="search">
+    <div className="search">
       <form className="search__form">
-        <input type="text" placeholder="Фильм" className="search__name" />
+        <input
+          type="text"
+          placeholder="Фильм"
+          className="search__name"
+          required
+        />
         <button className="search__button"></button>
       </form>
       <div className="search__filter">
         <FilterCheckbox />
         <span className="search__filter-text">Короткометражки</span>
       </div>
-    </section>
+    </div>
   );
 };
 

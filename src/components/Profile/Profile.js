@@ -1,15 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Profile.css";
-import Header from "../Header/Header";
 
 const Profile = ({ loggedIn }) => {
   const [name, setName] = useState("Наталья");
   const [email, setEmail] = useState("pochta@yandex.ru");
 
   return (
-    <section>
-      <Header loggedIn={loggedIn} />
+    <main>
       <form className="profile__container">
         <h1 className="profile__title">Привет, Наталья!</h1>
         <form className="profile__form">
@@ -48,7 +46,7 @@ const Profile = ({ loggedIn }) => {
           </Link>
         </div>
       </form>
-    </section>
+    </main>
   );
 };
 

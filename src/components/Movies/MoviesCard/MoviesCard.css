@@ -7,14 +7,13 @@
 .card__image {
   width: 270px;
   height: 151px;
-  border-radius: 0;
 }
 
 .card__description {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding-top: 10px;
+  padding-top: 9px;
   padding-bottom: 29px;
   border-bottom: 1px solid #e8e8e8;
   margin-bottom: 6px;
@@ -27,6 +26,7 @@
   font-size: 13px;
   line-height: 16px;
   color: #000000;
+  padding-right: 30px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -35,9 +35,11 @@
 .card__button {
   position: absolute;
   right: 0;
-  padding: 0;
+  top: 158px;
+  height: 24px;
+  width: 24px;
+  border-radius: 50px;
   border: none;
-  border-radius: 36px;
   transition: opacity 0.2s linear;
 }
 
@@ -47,24 +49,14 @@
 }
 
 .card__button_inactive {
-  margin: 2px 5px;
-  width: 10px;
-  height: 8.5px;
   background: #f9f9f9 url(../../../images/icon-save.svg) center no-repeat;
 }
 
 .card__button_active {
-  margin: 2px 5px;
-  width: 10px;
-  height: 8.5px;
   background: #f9f9f9 url(../../../images/icon-save-active.svg) center no-repeat;
 }
 
 .card__button_delete {
-  margin: 2px 5px;
-  width: 9px;
-  height: 9px;
-  cursor: pointer;
   background: #f9f9f9 url(../../../images/icon-delete.svg) center no-repeat;
 }
 
@@ -90,7 +82,7 @@
   }
 
   .card__description {
-    padding: 12px 0 29px;
+    padding: 10px 0 29px;
     margin-bottom: 7px;
     border-bottom: 1px solid #e8e8e8;
     font-size: 13px;
@@ -98,9 +90,8 @@
     line-height: 16px;
   }
 
-  .card__button_saved {
-    width: 10px;
-    height: 8.5px;
+  .card__button {
+    top: 198px;
   }
 }
 
@@ -115,12 +106,16 @@
   }
 
   .card__description {
-    padding: 14px 0 0;
+    padding: 12px 0 0;
   }
 
   .card__name {
     font-size: 12px;
     line-height: 15px;
     margin-bottom: 27px;
+  }
+
+  .card__button {
+    top: 180px;
   }
 }

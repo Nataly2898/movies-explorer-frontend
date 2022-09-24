@@ -12,7 +12,7 @@ const MoviesCard = ({ movie }) => {
   const { pathname } = useLocation();
 
   return (
-    <section className="card">
+    <li className="card">
       <img src={movie.image} alt={movie.name} className="card__image"></img>
       <div className="card__description">
         <p className="card__name">{movie.name}</p>
@@ -30,7 +30,7 @@ const MoviesCard = ({ movie }) => {
         )}
       </div>
       <p className="card__duration">{movie.duration}</p>
-    </section>
+    </li>
   );
 };
 

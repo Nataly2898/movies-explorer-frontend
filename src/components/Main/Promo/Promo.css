@@ -1,76 +1,52 @@
 .promo {
-  position: relative;
+  background: url("../../../images/logo-promo.svg") no-repeat;
+  background-position: right 70px bottom 60px;
+  background-size: 722px 244px;
   background-color: #5c5c5c;
-  height: 100vh;
-  max-height: 634px;
-  box-sizing: border-box;
-  overflow: hidden;
 }
 
-.promo__container {
-  padding: 50px 70px 0;
+.promo__banner {
+  display: flex;
+  padding: 50px 70px 405px;
 }
 
 .promo__title {
-  margin: 0;
   padding: 0;
-  color: #ffffff;
-  font-weight: 400;
+  margin: 0;
   font-size: 40px;
+  font-weight: 400;
   line-height: 52px;
   letter-spacing: -0.04em;
+  color: #ffffff;
   max-width: 626px;
 }
 
-.promo__logo {
-  position: absolute;
-  bottom: 60px;
-  right: 70px;
-  width: 722px;
-  height: 244px;
-}
-
-@media screen and (max-width: 780px) {
+@media screen and (max-width: 768px) {
   .promo {
-    max-height: 918px;
+    background-position: center 90%;
+    background-size: 680px 244px;
   }
 
-  .promo__container {
-    display: flex;
-    flex-direction: column;
+  .promo__banner {
     align-items: center;
-    padding: 300px 0 70px;
+    justify-content: center;
+    padding: 300px 44px 438px;
   }
 
   .promo__title {
-    position: unset;
     text-align: center;
-    margin-bottom: 140px;
     max-width: 680px;
-  }
-
-  .promo__logo {
-    position: unset;
-    width: 680px;
-    height: 230px;
-    display: block;
-    max-width: 100vw;
-    object-fit: cover;
   }
 }
 
 @media screen and (max-width: 420px) {
-  .promo {
-    max-height: 704px;
-  }
-
-  .promo__container {
-    padding: 183px 10px 0;
+  .promo__banner {
+    padding: 183px 10px 330px;
   }
 
   .promo__title {
-    margin-bottom: 60px;
     font-size: 31px;
     line-height: 39px;
+    max-width: 300px;
   }
 }

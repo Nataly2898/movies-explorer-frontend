@@ -72,6 +72,7 @@
 @media screen and (max-width: 768px) {
   .techs {
     padding: 90px 50px;
+    background-color: #FFFFFF;
   }
 
   .techs__title {
@@ -83,7 +84,7 @@
   }
 
   .techs__info-subtitle {
-    margin-bottom: 83px;
+    margin-bottom: 80px;
   }
 
   .techs__list {

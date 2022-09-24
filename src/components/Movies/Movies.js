@@ -1,20 +1,17 @@
-import React from 'react';
-import Header from '../Header/Header';
-import MoviesCardList from './MoviesCardList/MoviesCardList';
-import SearchForm from './SearchForm/SearchForm';
-import movies from '../../utils/Movies';
-import Footer from '../Footer/Footer';
-
+import React from "react";
+import MoviesCardList from "./MoviesCardList/MoviesCardList";
+import SearchForm from "./SearchForm/SearchForm";
+import movies from "../../utils/Movies";
 
 const Movies = ({ loggedIn }) => {
   return (
-    <section>
-      <Header loggedIn={loggedIn} />
-      <SearchForm />
-      <MoviesCardList buttonMore={true} movies={movies} />
-      <Footer />
-    </section>
-  )
+    <main>
+      <section className="movies">
+        <SearchForm />
+        <MoviesCardList buttonMore={true} movies={movies} />
+      </section>
+    </main>
+  );
 };
 
 export default Movies;

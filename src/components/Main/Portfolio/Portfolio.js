@@ -4,8 +4,8 @@ const Portfolio = () => {
   return (
     <section className="portfolio">
       <h2 className="portfolio__title">Портфолио</h2>
-      <ul className="portfolio__container">
-        <li>
+      <ul className="portfolio__list">
+        <li className="portfolio__list-item">
           <a
             className="portfolio__link"
             href="https://github.com/Nataly2898/how-to-learn"
@@ -14,9 +14,8 @@ const Portfolio = () => {
           >
             Статичный сайт
           </a>
-          <span>↗</span>
         </li>
-        <li>
+        <li className="portfolio__list-item">
           <a
             className="portfolio__link"
             href="https://github.com/Nataly2898/russian-travel"
@@ -25,9 +24,8 @@ const Portfolio = () => {
           >
             Адаптивный сайт
           </a>
-          <span>↗</span>
         </li>
-        <li>
+        <li className="portfolio__list-item">
           <a
             className="portfolio__link"
             href="https://github.com/Nataly2898/react-mesto-api-full"
@@ -36,7 +34,6 @@ const Portfolio = () => {
           >
             Одностраничное приложение
           </a>
-          <span>↗</span>
         </li>
       </ul>
     </section>

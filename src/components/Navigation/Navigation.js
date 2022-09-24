@@ -42,6 +42,11 @@ const Navigation = ({ loggedIn }) => {
               <div className="navigation__account"></div>
             </Link>
           </div>
+          {!isOpen ? (
+            <button className="burger__button" onClick={toggleMenu} />
+          ) : (
+            <BurgerMenu onClose={toggleMenu} />
+          )}
         </>
       ) : (
         <div className="navigation__authorization">
@@ -52,11 +57,6 @@ const Navigation = ({ loggedIn }) => {
             <button className="navigation__button">Войти</button>
           </Link>
         </div>
-      )}
-      {!isOpen && loggedIn ? (
-        <button className="burger__button" onClick={toggleMenu} />
-      ) : (
-        <BurgerMenu onClose={toggleMenu} />
       )}
     </nav>
   );

@@ -23,6 +23,10 @@
   color: #a0a0a0;
 }
 
+.search__name:focus{
+  background: #e8e8e8;
+}
+
 .search__button {
   background-color: #2be080;
   border: none;
