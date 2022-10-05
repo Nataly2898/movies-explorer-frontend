@@ -1,0 +1,14 @@
+export const MOVIES_URL = 'https://api.nomoreparties.co';
+export const MAIN_URL = 'https://api.moviessite.nomorepartiesxyz.ru'
+export const addErrorMovies = 'Во время добавления фильма произошла ошибка.';
+export const deleteErrorMovies = 'Во время удаления фильма произошла ошибка.';
+export const searchErrorMovies = 'Нужно ввести ключевое слово';
+export const messageErrorMovies = 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз';
+export const serverError = 'Что-то пошло не так! Ошибка сервера';
+export const validationEmailError = 'Некорректый адрес почты';
+export const registerSuccessful = 'Вы успешно зарегистрировались!';
+export const registerError = 'Что-то пошло не так! Ошибка регистрации';
+export const authError = 'Что-то пошло не так! Ошибка авторизации.';
+export const MAX_SHORT_MOVIE_DORATION = 40;
+export const MIN_NUMBER_OF_CARDS = 4;
+export const MAX_NUMBER_OF_CARDS = 100;
