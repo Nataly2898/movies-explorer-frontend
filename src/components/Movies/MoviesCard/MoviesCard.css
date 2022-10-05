@@ -1,15 +1,15 @@
-.card {
+.movie__card {
   width: 270px;
   position: relative;
   margin: auto;
 }
 
-.card__image {
+.movie__image {
   width: 270px;
   height: 151px;
 }
 
-.card__description {
+.movie__description {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -19,7 +19,7 @@
   margin-bottom: 6px;
 }
 
-.card__name {
+.movie__name {
   margin: 0;
   padding: 0;
   font-weight: 500;
@@ -32,7 +32,7 @@
   overflow: hidden;
 }
 
-.card__button {
+.movies__button {
   position: absolute;
   right: 0;
   top: 158px;
@@ -40,27 +40,28 @@
   width: 24px;
   border-radius: 50px;
   border: none;
+  cursor: pointer;
   transition: opacity 0.2s linear;
 }
 
-.card__button:hover {
+.movies__button:hover {
   opacity: 0.6;
   cursor: pointer;
 }
 
-.card__button_inactive {
-  background: #f9f9f9 url(../../../images/icon-save.svg) center no-repeat;
+.movies__button_type_save {
+  background: #f9f9f9 url("../../../images/icon-save.svg") center no-repeat;
 }
 
-.card__button_active {
-  background: #f9f9f9 url(../../../images/icon-save-active.svg) center no-repeat;
+.movies__button_type_delete {
+  background: #f9f9f9 url("../../../images/icon-delete.svg") center no-repeat;
 }
 
-.card__button_delete {
-  background: #f9f9f9 url(../../../images/icon-delete.svg) center no-repeat;
+.movies__button_type_save-active {
+  background: #f9f9f9 url("../../../images/icon-save-active.svg") center no-repeat;
 }
 
-.card__duration {
+.movie__duration {
   margin: 0;
   padding: 0;
   display: block;
@@ -72,16 +73,18 @@
 }
 
 @media screen and (max-width: 768px) {
-  .card {
+  .movie__card {
     width: 339px;
   }
 
-  .card__image {
+  .movie__image {
     width: 339px;
     height: 190px;
   }
 
-  .card__description {
+  .movie__description {
+    padding: 0;
+    margin: 0;
     padding: 10px 0 29px;
     margin-bottom: 7px;
     border-bottom: 1px solid #e8e8e8;
@@ -90,32 +93,32 @@
     line-height: 16px;
   }
 
-  .card__button {
+  .movies__button {
     top: 198px;
   }
 }
 
 @media screen and (max-width: 320px) {
-  .card {
+  .movie__card {
     width: 300px;
   }
 
-  .card__image {
+  .movie__image {
     width: 300px;
     height: 168px;
   }
 
-  .card__description {
+  .movie__description {
     padding: 12px 0 0;
   }
 
-  .card__name {
+  .movie__name {
     font-size: 12px;
     line-height: 15px;
     margin-bottom: 27px;
   }
 
-  .card__button {
+  .movies__button {
     top: 180px;
   }
 }

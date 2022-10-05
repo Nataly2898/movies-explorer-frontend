@@ -1,35 +1,65 @@
+import { moviesDate } from "../../../utils/moviesDate";
+import { imageFormat } from "../../../utils/moviesImage";
 import "./MoviesCard.css";
-import React from "react";
-import { useLocation } from "react-router-dom";
 
-const MoviesCard = ({ movie }) => {
-  const [favorite, setFavorite] = React.useState(false);
+const MoviesCard = ({
+  movie,
+  savedViewMovies,
+  onSave,
+  userId,
+  savedMovies,
+  onRemove,
+  saved,
+}) => {
+  const { nameRU, image, duration, id, trailerLink } = movie;
+  const formatedDuration = moviesDate(duration);
+  const formatedImgSrc = imageFormat(image);
 
-  function handleFavorite() {
-    setFavorite(!favorite);
-  }
+  const handleMovieAction = (e) => {
+    e.stopPropagation();
+    if (saved) {
+      const foundMovie = savedMovies.find((movie) => +movie.movieId === +id);
+      if (foundMovie) {
+        onRemove(foundMovie._id);
+      }
+    } else {
+      onSave(movie, userId);
+    }
+  };
 
-  const { pathname } = useLocation();
+  const handleRemoveMovie = (e) => {
+    e.stopPropagation();
+    onRemove(movie._id);
+  };
+
+  const handleMovieClick = () => {
+    if (trailerLink) {
+      window.open(trailerLink, "_blank");
+    }
+  };
+
+  const cardButton = savedViewMovies ? (
+    <button
+      onClick={handleRemoveMovie}
+      className="movies__button movies__button_type_delete"
+    ></button>
+  ) : (
+    <button
+      onClick={handleMovieAction}
+      className={`movies__button movies__button_type_save ${
+        saved && "movies__button_type_save-active"
+      }`}
+    ></button>
+  );
 
   return (
-    <li className="card">
-      <img src={movie.image} alt={movie.name} className="card__image"></img>
-      <div className="card__description">
-        <p className="card__name">{movie.name}</p>
-
-        {pathname === "/saved-movies" ? (
-          <button type="button" className="card__button card__button_delete" />
-        ) : (
-          <button
-            type="button"
-            className={`card__button card__button${
-              favorite ? "_active" : "_inactive"
-            }`}
-            onClick={handleFavorite}
-          />
-        )}
+    <li onClick={handleMovieClick} className="movie__card">
+      <img className="movie__image" src={formatedImgSrc} alt={nameRU} />
+      <div className="movie__description">
+        <h3 className="movie__name">{nameRU}</h3>
+        {cardButton}
       </div>
-      <p className="card__duration">{movie.duration}</p>
+      <p className="movie__duration">{formatedDuration}</p>
     </li>
   );
 };

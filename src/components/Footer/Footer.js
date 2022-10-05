@@ -3,10 +3,11 @@ import "./Footer.css";
 const Footer = () => {
   return (
     <footer className="footer">
-      <p className="footer__text">
+     <div className="footer__container">
+     <p className="footer__text">
         Учебный проект Яндекс.Практикум х BeatFilm.
       </p>
-      <div className="footer-container">
+      <div className="footer-content">
         <p className="footer__copyright">© 2022</p>
         <div className="footer__list">
           <a
@@ -28,6 +29,7 @@ const Footer = () => {
           </a>
         </div>
       </div>
+     </div>
     </footer>
   );
 };
