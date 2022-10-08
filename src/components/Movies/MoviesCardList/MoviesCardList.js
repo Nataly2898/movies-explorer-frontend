@@ -11,11 +11,11 @@ const MoviesCardList = ({ movies = [], onSave, savedMovies, onRemove }) => {
 
   const contentsMovies = movies.map((movie, index) => (
     <MoviesCard
+      key={`${movie.movieId}_${index}`}
       onRemove={onRemove}
       savedMovies={savedMovies}
       userId={_id}
       onSave={onSave}
-      key={`${movie.id}${index}`}
       movie={movie}
       savedViewMovies={savedViewMovies}
       saved={savedMovies.some((i) => +i.movieId === +movie.id)}

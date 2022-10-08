@@ -9,14 +9,19 @@ import "./SavedMovies.css";
 const SavedMovies = ({ savedMovies, onRemove }) => {
   const [shownMovies, setShownMovies] = useState([]);
   const [noResults, setNoResults] = useState(false);
+  const [isShort, setIsShort] = useState(false);
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
-    setShownMovies(savedMovies);
-  }, [savedMovies]);
+    const filteredMovies = filterMovies(search, savedMovies, isShort);
+    setShownMovies(filteredMovies);
+  }, [search, isShort, savedMovies]);
 
   const onSearch = (search, isShort) => {
     const movies = JSON.parse(localStorage.getItem("savedMovies"));
 
+    setSearch(search);
+    setIsShort(isShort);
     const filteredMovies = filterMovies(search, movies, isShort);
     if (!filteredMovies.length) {
       setNoResults(true);
