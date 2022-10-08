@@ -24,5 +24,3 @@ export const MIN_NUMBER_MOVIE = 5;
 export const MID_NUMBER_MOVIE = 8;
 export const MAX_NUMBER_MOVIE = 12;
 export const MAX_NUMBER_MOVIES = 16;
-
-export const defaultImageLink = 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fjoyreactor.cc%2Fpost%2F680932&psig=AOvVaw2SRQcuudVcPOpFgNvSOncI&ust=1665221701969000&source=images&cd=vfe&ved=0CAkQjRxqFwoTCMCAwbTozfoCFQAAAAAdAAAAABAD';
