@@ -5,6 +5,18 @@ import MoviesCardList from "./MoviesCardList/MoviesCardList";
 import Preloader from "./Preloader/Preloader";
 import Footer from "../Footer/Footer";
 import "./Movies.css";
+import {
+  MAX_NUMBER_OF_SCREEN,
+  MID_NUMBER_OF_SCREEN,
+  MIN_NUMBER_OF_SCREEN,
+  MIN_NUMBER_ROW,
+  MID_NUMBER_ROW,
+  MAX_NUMBER_ROW,
+  MAX_NUMBER_MOVIES,
+  MAX_NUMBER_MOVIE,
+  MID_NUMBER_MOVIE,
+  MIN_NUMBER_MOVIE,
+} from "../../utils/constans";
 
 const Movies = ({
   onSearch,
@@ -16,6 +28,8 @@ const Movies = ({
   savedMovies,
   noResults,
   clearError,
+  searchLocal,
+  shortLocal
 }) => {
   const [screenWidth, setScreenWidth] = useState(window.screen.width);
   const [rowMovies, setRowMovies] = useState(null);
@@ -24,13 +38,14 @@ const Movies = ({
 
   useEffect(() => {
     let rtime;
-    let timeout = false;
+    let isTimeout = false;
     let delta = 200;
+    let timeout = null
 
     const resizeEvent = () => {
       rtime = new Date();
-      if (timeout === false) {
-        timeout = true;
+      if (isTimeout === false) {
+        isTimeout = true;
         setTimeout(resizeAction, delta);
       }
     };
@@ -39,9 +54,11 @@ const Movies = ({
 
     const resizeAction = () => {
       if (new Date() - rtime < delta) {
-        setTimeout(resizeAction, delta);
+        clearTimeout(timeout)
+
+        timeout = setTimeout(resizeAction, delta);
       } else {
-        timeout = false;
+        isTimeout = false;
         setScreenWidth(window.screen.width);
       }
     };
@@ -51,15 +68,24 @@ const Movies = ({
   }, []);
 
   const homeScreen = (screenWidth) => {
-    if (screenWidth > 1100) {
-      setRowMovies(4);
-      setNumberMovies(16);
-    } else if (screenWidth >= 768 && screenWidth <= 1100) {
-      setRowMovies(2);
-      setNumberMovies(8);
+    if (screenWidth > MAX_NUMBER_OF_SCREEN) {
+      setRowMovies(MAX_NUMBER_ROW);
+      setNumberMovies(MAX_NUMBER_MOVIES);
+    } else if (
+      screenWidth >= MID_NUMBER_OF_SCREEN &&
+      screenWidth <= MAX_NUMBER_OF_SCREEN
+    ) {
+      setRowMovies(MID_NUMBER_ROW);
+      setNumberMovies(MAX_NUMBER_MOVIE);
+    } else if (
+      screenWidth >= MIN_NUMBER_OF_SCREEN &&
+      screenWidth <= MID_NUMBER_OF_SCREEN
+    ) {
+      setRowMovies(MIN_NUMBER_ROW);
+      setNumberMovies(MID_NUMBER_MOVIE);
     } else {
-      setRowMovies(2);
-      setNumberMovies(5);
+      setRowMovies(MIN_NUMBER_ROW);
+      setNumberMovies(MIN_NUMBER_MOVIE);
     }
   };
 
@@ -91,7 +117,8 @@ const Movies = ({
         <div className="movies container">
           <SearchForm
             onSearch={handleSearch}
-            cacheValue={localStorage.getItem("search")}
+            searchLocal={searchLocal}
+            shortLocal={shortLocal}
           />
           {!isLoading && noResults && (
             <p className="movies__notfound">Ничего не найдено</p>

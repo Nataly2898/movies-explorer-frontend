@@ -15,12 +15,15 @@ const SavedMovies = ({ savedMovies, onRemove }) => {
   }, [savedMovies]);
 
   const onSearch = (search, isShort) => {
-    const filteredMovies = filterMovies(search, savedMovies, isShort);
+    const movies = JSON.parse(localStorage.getItem("savedMovies"));
+
+    const filteredMovies = filterMovies(search, movies, isShort);
     if (!filteredMovies.length) {
       setNoResults(true);
     } else {
       setNoResults(false);
     }
+
     setShownMovies(filteredMovies);
   };
 
@@ -29,7 +32,7 @@ const SavedMovies = ({ savedMovies, onRemove }) => {
       <Header />
       <main className="main">
         <section className="container saved-movies">
-          <SearchForm onSearch={onSearch} />
+          <SearchForm onSearch={onSearch} shortLocal={false} searchLocal={''} />
           <MoviesCardList
             onRemove={onRemove}
             savedMovies={savedMovies}

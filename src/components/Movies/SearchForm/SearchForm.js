@@ -1,30 +1,33 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import "./SearchForm.css";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
-import { ReactComponent as SearchIcon } from "../../../images/icon-search.svg";
 import { searchErrorMovies } from "../../../utils/constans";
 
-const SearchForm = ({ onSearch, cacheValue }) => {
-  const [search, setSearch] = useState(cacheValue);
+const SearchForm = ({ onSearch, searchLocal, shortLocal }) => {
+  const [search, setSearch] = useState(searchLocal || "");
   const [error, setError] = React.useState("");
-  const [isShort, setIsShort] = useState(
-    localStorage.getItem("isShort") === "true" ? true : false
-  );
-  const [isValid, setValid] = useState(false);
+  const [isShort, setIsShort] = useState(shortLocal === "true" ? true : false);
+  const [isValid, setValid] = useState(true);
 
   const handleSearch = (e) => {
     e.preventDefault();
     setError("");
+
     onSearch(search, isShort);
-    setSearch("");
   };
 
   const handleInvalidForm = () => {
-    setValid(false);
+    if (!search) {
+      setValid(false);
+      setError(searchErrorMovies);
+    }
   };
 
   const handleInputChange = (e) => {
     setSearch(e.target.value);
+
+    setValid(true);
+
     if (e.target.value.length === 0) {
       setError(searchErrorMovies);
     } else {
@@ -32,11 +35,13 @@ const SearchForm = ({ onSearch, cacheValue }) => {
     }
   };
 
-  const handleCheckboxSwitch = useCallback(() => {
+  const handleCheckboxSwitch = () => {
     setIsShort(!isShort);
 
-    localStorage.setItem("isShort", !isShort);
-  }, [isShort]);
+    console.log(!isShort);
+
+    onSearch(search, !isShort);
+  };
 
   React.useEffect(() => {
     if (search && !error) {
@@ -61,9 +66,13 @@ const SearchForm = ({ onSearch, cacheValue }) => {
           placeholder="Фильм"
           required
         />
-        <button type="submit" className="search__button" disabled={!isValid}>
-          <SearchIcon />
-        </button>
+        <button
+          className={`search__button ${
+            !isValid ? "search__button_disabled" : ""
+          }`}
+          type="submit"
+          disabled={!isValid}
+        />
       </form>
       <span className="form__item-error">{error}</span>
       <div className="search__filter">

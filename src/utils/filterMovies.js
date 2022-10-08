@@ -1,7 +1,7 @@
 export const filterMovies = (filter, movies, isShort) => {
   const filteredMovies = movies.filter(
     (movie) =>
-      movie.nameRU.toLowerCase().includes(filter.toLowerCase().trim()) &&
+      movie.nameRU?.toLowerCase()?.includes(filter?.toLowerCase()?.trim()) &&
       (isShort ? movie.duration <= 40 : true)
   );
   return filteredMovies;

@@ -21,6 +21,9 @@ import {
   registerSuccessful,
   registerError,
   authError,
+  profileSuccessful,
+  deleteMovies,
+  deleteErrorMovies
 } from "../../utils/constans";
 
 function App() {
@@ -43,6 +46,7 @@ function App() {
 
   useEffect(() => {
     tokenCheck();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [history]);
 
   const tokenCheck = async () => {
@@ -54,6 +58,8 @@ function App() {
         ...userData,
       }));
     } catch (err) {
+      handleSignOut()
+
       console.log(serverError);
     } finally {
       setIsLoading(false);
@@ -63,9 +69,21 @@ function App() {
   //Получение фильмов
   const fetchMovies = async () => {
     try {
+      const localMovies = JSON.parse(localStorage.getItem('preloadMovies'))
+      if (localMovies) {
+        setPreloadMovies(localMovies)
+
+        return localMovies
+      }
+
       const movies = await MoviesApi.getMovies();
 
+      localStorage.setItem('preloadMovies', JSON.stringify(movies))
+
       setPreloadMovies(movies)
+
+      return movies
+
     } catch (error) {
       console.log(error);
       setError(error);
@@ -78,9 +96,13 @@ function App() {
       clearError();
       setIsLoading(true);
 
-      if (!preloadMovies.length) await fetchMovies()
+      let movies = preloadMovies
 
-      const filteredMovies = filterMovies(searchValue, preloadMovies, isShort);
+      if (!movies || !movies.length) {
+        movies = await fetchMovies()
+      }
+
+      const filteredMovies = filterMovies(searchValue, movies, isShort);
       setMovies(filteredMovies);
       localStorage.setItem("filteredMovies", JSON.stringify(filteredMovies));
       localStorage.setItem("search", searchValue);
@@ -100,7 +122,7 @@ function App() {
 
   useEffect(() => {
     localStorage.getItem("filteredMovies") &&
-      setMovies(JSON.parse(localStorage.getItem("filteredMovies")));
+    setMovies(JSON.parse(localStorage.getItem("filteredMovies")));
   }, []);
 
   useEffect(() => {
@@ -138,8 +160,9 @@ function App() {
       const filteredMovies = savedMovies.filter((item) => item._id !== movieId);
       setSavedMovies(filteredMovies);
       localStorage.setItem("savedMovies", JSON.stringify(filteredMovies));
+      openPopup(deleteMovies);
     } catch (error) {
-      console.log(error);
+      console.log(deleteErrorMovies);
     }
   };
 
@@ -164,13 +187,13 @@ function App() {
       .then(({ token }) => {
         if (token) {
           Token.save(token);
-          MainApi.updateToken();
+          MainApi.updateToken(token);
           setLoggedIn(true);
           tokenCheck();
           history.push("/movies");
         }
       })
-      .catch((err) => {
+      .catch((error) => {
         setPopupTitle(authError);
         setIsOpenPopupError(true);
       });
@@ -184,7 +207,7 @@ function App() {
         ...user,
         ...response,
       }));
-
+      openPopup(profileSuccessful);
     } catch (error) {
       console.log(error);
     }
@@ -225,6 +248,10 @@ function App() {
     history.push("/");
   }
 
+  function handleBack() {
+    history.goBack()
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
@@ -241,6 +268,8 @@ function App() {
             isLoading={isLoading}
             openPopup={openPopup}
             onSearch={handleSearch}
+            searchLocal={localStorage.getItem('search')}
+            shortLocal={localStorage.getItem('isShort')}
             error={error}
             onSave={handleSaveMovie}
             onRemove={handleRemoveMovie}
@@ -290,7 +319,9 @@ function App() {
             }
           </Route>
           <Route path="*">
-            <NotFoundPage />
+            <NotFoundPage
+              back={handleBack} 
+            />
           </Route>
         </Switch>
         <Popup

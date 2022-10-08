@@ -1,5 +1,6 @@
-import { MAIN_URL } from "./constans";
+import { MAIN_URL, defaultImageLink } from "./constans";
 import { imageThumbnail, imageFormat } from "./moviesImage";
+import { isUrl } from './validators'
 
 class MainApi {
   constructor(config) {
@@ -77,7 +78,7 @@ class MainApi {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
-        country: movie.country,
+        country: movie.country || 'Россия',
         description: movie.description || "-",
         director: movie.director || "-",
         duration: movie.duration || 0,
@@ -85,8 +86,8 @@ class MainApi {
         movieId: movie.id,
         nameEN: movie.nameEN || "-",
         nameRU: movie.nameRU || "-",
-        thumbnail: imageThumbnail(movie.image),
-        trailerLink: movie.trailerLink,
+        thumbnail: imageThumbnail(movie.image) || defaultImageLink,
+        trailerLink: isUrl(movie.trailerLink) ? movie.trailerLink : 'https://www.youtube.com/watch?v=sqykiLnCS7M',
         year: movie.year || "-",
       }),
     }).then(this._checkResponse);
@@ -100,8 +101,8 @@ class MainApi {
     }).then(this._checkResponse);
   }
 
-  updateToken() {
-    this._headers.Authorization = `Bearer ${localStorage.getItem("jwt")}`;
+  updateToken(token) {
+    this._headers.Authorization = `Bearer ${token}`;
   }
 }
 

@@ -49,17 +49,20 @@
   height: 34px;
   width: 34px;
   padding: 0;
-  background-color: #2be080;
+  background: #2be080 url("../../../images/icon-search.svg")  center no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  cursor: pointer;
-  transition: 0.3 linear 0.3;
 }
 
 .search__button:hover {
   opacity: .7;
+  cursor: pointer;
+}
+
+.search__button_disabled {
+  background: rgba(43, 224, 128, 0.4) url("../../../images/icon-search.svg")  center no-repeat;;
 }
 
 .search__filter {

@@ -73,20 +73,14 @@ function Profile(props) {
   }, [currentUser]);
 
   useEffect(() => {
-    if (nameError || emailError) {
-      setFormValid(false);
-    } else {
-      setFormValid(true);
-    }
-  }, [nameError, emailError]);
+    const isNoUpdates = currentUser.name === name && currentUser.email === email
 
-  useEffect(() => {
-    if (currentUser.name === name && currentUser.email === email) {
+    if (nameError || emailError || isNoUpdates) {
       setFormValid(false);
     } else {
       setFormValid(true);
     }
-  }, [name, email, currentUser.name, currentUser.email]);
+  }, [nameError, emailError, name, email, currentUser.name, currentUser.email]);
 
   return (
     <>
