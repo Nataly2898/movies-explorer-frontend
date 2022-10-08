@@ -24,3 +24,4 @@ export const MIN_NUMBER_MOVIE = 5;
 export const MID_NUMBER_MOVIE = 8;
 export const MAX_NUMBER_MOVIE = 12;
 export const MAX_NUMBER_MOVIES = 16;
+export const defaultImageLink = 'https://topkin.ru/wp-content/uploads/2017/03/12-2.jpg';
