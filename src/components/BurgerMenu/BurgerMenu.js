@@ -1,9 +1,9 @@
 import React from "react";
-import { Link, useRouteMatch } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./BurgerMenu.css";
 
 const BurgerMenu = ({ onClose }) => {
-  const routeMatch = useRouteMatch();
+  const { pathname } = useLocation();
 
   return (
     <div className="burger">
@@ -18,7 +18,7 @@ const BurgerMenu = ({ onClose }) => {
             <Link
               to="/"
               className={
-                routeMatch.path === "/" ? "burger-link_active" : "burger-link"
+                pathname === "/" ? "burger-link_active" : "burger-link"
               }
             >
               Главная
@@ -26,7 +26,7 @@ const BurgerMenu = ({ onClose }) => {
             <Link
               to="/movies"
               className={
-                routeMatch.path === "/movies"
+                pathname === "/movies"
                   ? "burger-link_active"
                   : "burger-link"
               }
@@ -36,7 +36,7 @@ const BurgerMenu = ({ onClose }) => {
             <Link
               to="/saved-movies"
               className={
-                routeMatch.path === "/saved-movies"
+                pathname === "/saved-movies"
                   ? "burger-link_active"
                   : "burger-link"
               }

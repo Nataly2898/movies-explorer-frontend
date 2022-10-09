@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Link, useRouteMatch } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./Navigation.css";
 import BurgerMenu from "../BurgerMenu/BurgerMenu";
 
 const Navigation = ({ loggedIn }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const routeMatch = useRouteMatch();
+
+  const { pathname } = useLocation();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -19,7 +20,7 @@ const Navigation = ({ loggedIn }) => {
             <Link
               to="/movies"
               className={
-                routeMatch.path === "/movies"
+                pathname === "/movies"
                   ? "navigation__movies-link_active"
                   : "navigation__movies-link"
               }
@@ -29,7 +30,7 @@ const Navigation = ({ loggedIn }) => {
             <Link
               to="/saved-movies"
               className={
-                routeMatch.path === "/saved-movies"
+                pathname === "/saved-movies"
                   ? "navigation__movies-link_active"
                   : "navigation__movies-link"
               }

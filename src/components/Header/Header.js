@@ -4,13 +4,15 @@ import "./Header.css";
 import { Link } from "react-router-dom";
 import logo from "../../images/logo-header.svg";
 import Navigation from "../Navigation/Navigation";
+import Token from "../../utils/token";
 
 
-const Header = ({ loggedIn }) => {
-
+const Header = () => {
   const { pathname } = useLocation();
 
-  const classHeader = `header ${pathname === '/' ? 'header_home' : ''}`;
+  const loggedIn = Token.get()
+
+  const classHeader = `header ${pathname === '/' ? loggedIn ? 'header_home_white' : 'header_home' : ''}`;
 
   return (
     <header className={classHeader}>

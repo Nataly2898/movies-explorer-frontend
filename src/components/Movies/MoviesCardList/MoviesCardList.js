@@ -1,40 +1,31 @@
-import React, { useState } from "react";
-import "./MoviesCardList.css";
-import Preloader from "../Preloader/Preloader";
 import MoviesCard from "../MoviesCard/MoviesCard";
+import { useLocation } from "react-router-dom";
+import { CurrentUserContext } from "../../../contexts/CurrentUserContext";
+import "./MoviesCardList.css";
+import { useContext } from "react";
 
-const MoviesCardList = ({ movies, buttonMore }) => {
-  const [isLoading, setLoading] = useState(false);
+const MoviesCardList = ({ movies = [], onSave, savedMovies, onRemove }) => {
+  const { pathname } = useLocation();
+  const { _id } = useContext(CurrentUserContext);
+  const savedViewMovies = pathname === "/saved-movies";
 
-  const handlePreloader = () => {
-    setLoading(true);
-  };
+  const contentsMovies = movies.map((movie, index) => (
+    <MoviesCard
+      key={`${movie.movieId}_${index}`}
+      onRemove={onRemove}
+      savedMovies={savedMovies}
+      userId={_id}
+      onSave={onSave}
+      movie={movie}
+      savedViewMovies={savedViewMovies}
+      saved={savedMovies.some((i) => +i.movieId === +movie.id)}
+    />
+  ));
 
   return (
-    <div className="cards">
-      <ul className="cards__list">
-        {movies.map((movie) => (
-          <MoviesCard key={movie.id} movie={movie} />
-        ))}
-      </ul>
-
-      {isLoading ? (
-        <Preloader />
-      ) : (
-        buttonMore && (
-          <div className="cards__button-container">
-            <button
-              className="cards__button"
-              type="button"
-              name="more"
-              onClick={handlePreloader}
-            >
-              Ещё
-            </button>
-          </div>
-        )
-      )}
-    </div>
+    <section className="movies-card">
+      <ul className="movies-card__list">{contentsMovies}</ul>
+    </section>
   );
 };
 

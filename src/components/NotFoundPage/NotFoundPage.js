@@ -1,16 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
+//import { Link, useHistory } from "react-router-dom";
 import "./NotFoundPage.css";
 
-const NotFoundPage = () => {
+const NotFoundPage = ({ back }) => {
+
   return (
     <main>
       <section className="notfoundpage">
         <h1 className="notfoundpage__title">404</h1>
         <h2 className="notfoundpage__subtitle">Страница не найдена</h2>
-        <Link className="notfoundpage__link" to="/">
+        <button className="notfoundpage__link" onClick={back}>
           Назад
-        </Link>
+        </button>
       </section>
     </main>
   );

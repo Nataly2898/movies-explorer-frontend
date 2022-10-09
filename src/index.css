@@ -1,5 +1,6 @@
 @import url(./vendor/normalize.css);
 @import url(./vendor/fonts/fonts.css);
+@import url(./utils/container.css);
 
 body {
   -moz-osx-font-smoothing: grayscale;
@@ -10,8 +11,22 @@ body {
   text-rendering: optimizeLegibility;
   margin: 0;
   padding: 0;
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   font-family: "Inter", Helvetica, Arial, sans-serif;
+}
+
+#root {
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
